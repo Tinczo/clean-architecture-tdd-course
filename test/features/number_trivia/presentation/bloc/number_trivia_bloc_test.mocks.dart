@@ -36,12 +36,10 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 // ignore_for_file: invalid_use_of_internal_member
 
-class _FakeNumberTriviaRepositoryContract_0 extends _i1.SmartFake
-    implements _i2.NumberTriviaRepositoryContract {
-  _FakeNumberTriviaRepositoryContract_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(parent, parentInvocation);
+class _FakeNumberTriviaRepository_0 extends _i1.SmartFake
+    implements _i2.NumberTriviaRepository {
+  _FakeNumberTriviaRepository_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
@@ -55,19 +53,19 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
 class MockGetConcreteNumberTrivia extends _i1.Mock
     implements _i4.GetConcreteNumberTrivia {
   @override
-  _i2.NumberTriviaRepositoryContract get repository =>
+  _i2.NumberTriviaRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeNumberTriviaRepositoryContract_0(
+            returnValue: _FakeNumberTriviaRepository_0(
               this,
               Invocation.getter(#repository),
             ),
-            returnValueForMissingStub: _FakeNumberTriviaRepositoryContract_0(
+            returnValueForMissingStub: _FakeNumberTriviaRepository_0(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.NumberTriviaRepositoryContract);
+          as _i2.NumberTriviaRepository);
 
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.NumberTrivia>> call(
@@ -99,19 +97,19 @@ class MockGetConcreteNumberTrivia extends _i1.Mock
 class MockGetRandomNumberTrivia extends _i1.Mock
     implements _i8.GetRandomNumberTrivia {
   @override
-  _i2.NumberTriviaRepositoryContract get repository =>
+  _i2.NumberTriviaRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeNumberTriviaRepositoryContract_0(
+            returnValue: _FakeNumberTriviaRepository_0(
               this,
               Invocation.getter(#repository),
             ),
-            returnValueForMissingStub: _FakeNumberTriviaRepositoryContract_0(
+            returnValueForMissingStub: _FakeNumberTriviaRepository_0(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.NumberTriviaRepositoryContract);
+          as _i2.NumberTriviaRepository);
 
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.NumberTrivia>> call(

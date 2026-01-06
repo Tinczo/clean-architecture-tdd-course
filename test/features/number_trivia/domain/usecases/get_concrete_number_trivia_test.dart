@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'get_concrete_number_trivia_test.mocks.dart';
 
-@GenerateMocks([NumberTriviaRepositoryContract])
+@GenerateMocks([NumberTriviaRepository])
 void main() {
   late GetConcreteNumberTrivia usecase;
   late MockNumberTriviaRepositoryContract mockNumberTriviaRepository;

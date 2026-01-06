@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 
 import 'get_random_number_trivia_test.mocks.dart';
 
-@GenerateMocks([NumberTriviaRepositoryContract])
+@GenerateMocks([NumberTriviaRepository])
 void main() {
   late GetRandomNumberTrivia usecase;
   late MockNumberTriviaRepositoryContract mockNumberTriviaRepository;

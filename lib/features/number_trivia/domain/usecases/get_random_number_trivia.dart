@@ -4,7 +4,7 @@ import '../contracts/number_trivia_repository_contract.dart';
 import '../entities/number_trivia.dart';
 
 class GetRandomNumberTrivia implements UseCase<NumberTrivia, NoParams> {
-  final NumberTriviaRepositoryContract repository;
+  final NumberTriviaRepository repository;
 
   GetRandomNumberTrivia(this.repository);
 

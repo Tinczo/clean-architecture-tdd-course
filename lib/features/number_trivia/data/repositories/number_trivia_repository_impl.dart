@@ -12,7 +12,7 @@ import '../models/number_trivia_model.dart';
 
 typedef _ConcreteOrRandomChooser = Future<NumberTriviaModel> Function();
 
-class NumberTriviaRepositoryImpl implements NumberTriviaRepositoryContract {
+class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NumberTriviaRemoteDataSource remoteDataSource;
   final NumberTriviaLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
