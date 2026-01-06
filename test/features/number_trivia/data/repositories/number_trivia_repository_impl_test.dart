@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:clean_architecture_tdd_course/core/error/exceptions.dart';
 import 'package:clean_architecture_tdd_course/core/error/failures.dart';
 import 'package:clean_architecture_tdd_course/core/network/network_info.dart';
