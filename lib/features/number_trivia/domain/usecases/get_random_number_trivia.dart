@@ -1,5 +1,5 @@
 import '../../../../core/error/failures.dart';
-import '../../../../core/error/usecases/usecase.dart';
+import '../../../../core/usecases/usecase.dart';
 import '../entities/number_trivia.dart';
 import 'package:dartz/dartz.dart';
 
