@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/type_defs.dart';
 import '../../../../core/usecases/usecase.dart';
+import '../contracts/number_trivia_repository_contract.dart';
 import '../entities/number_trivia.dart';
 import '../contracts/number_trivia_repository_contract.dart';
 
