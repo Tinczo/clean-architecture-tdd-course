@@ -1,10 +1,10 @@
 import '../../../../core/type_defs.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../entities/number_trivia.dart';
-import '../repositories/number_trivia_repository.dart';
+import '../contracts/number_trivia_repository_contract.dart';
 
 class GetRandomNumberTrivia implements UseCase<NumberTrivia, NoParams> {
-  final NumberTriviaRepository repository;
+  final NumberTriviaRepositoryContract repository;
 
   GetRandomNumberTrivia(this.repository);
 

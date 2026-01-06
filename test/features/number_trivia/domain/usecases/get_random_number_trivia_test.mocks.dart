@@ -8,7 +8,7 @@ import 'dart:async' as _i4;
 import 'package:clean_architecture_tdd_course/core/error/failures.dart' as _i5;
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/entities/number_trivia.dart'
     as _i6;
-import 'package:clean_architecture_tdd_course/features/number_trivia/domain/repositories/number_trivia_repository.dart'
+import 'package:clean_architecture_tdd_course/features/number_trivia/domain/contracts/number_trivia_repository_contract.dart'
     as _i3;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -37,7 +37,7 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaRepository extends _i1.Mock
-    implements _i3.NumberTriviaRepository {
+    implements _i3.NumberTriviaRepositoryContract {
   MockNumberTriviaRepository() {
     _i1.throwOnMissingStub(this);
   }
