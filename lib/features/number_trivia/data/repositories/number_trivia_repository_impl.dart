@@ -1,12 +1,10 @@
-import 'package:clean_architecture_tdd_course/core/error/exceptions.dart';
-
-import '../../../../core/error/failures.dart';
-
-import '../../../../core/platform/network_info.dart';
-import '../../domain/entities/number_trivia.dart';
-
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/network/network_info.dart';
+import '../../../../core/type_defs.dart';
+import '../../domain/entities/number_trivia.dart';
 import '../../domain/repositories/number_trivia_repository.dart';
 import '../datasources/number_trivia_local_datasource.dart';
 import '../datasources/number_trivia_remote_datasource.dart';
@@ -26,18 +24,16 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   });
 
   @override
-  Future<Either<Failure, NumberTrivia>> getConcreteNumberTrivia(
-    int number,
-  ) async {
+  FutureEither<NumberTrivia> getConcreteNumberTrivia(int number) async {
     return _getTrivia(() => remoteDataSource.getConcreteNumberTrivia(number));
   }
 
   @override
-  Future<Either<Failure, NumberTrivia>> getRandomNumberTrivia() async {
+  FutureEither<NumberTrivia> getRandomNumberTrivia() async {
     return _getTrivia(() => remoteDataSource.getRandomNumberTrivia());
   }
 
-  Future<Either<Failure, NumberTrivia>> _getTrivia(
+  FutureEither<NumberTrivia> _getTrivia(
     _ConcreteOrRandomChooser getConcreteOrRandom,
   ) async {
     if (await networkInfo.isConnected) {

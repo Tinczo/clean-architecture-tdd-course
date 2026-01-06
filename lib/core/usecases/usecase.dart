@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-import '../error/failures.dart';
+import '../type_defs.dart';
 
-abstract class UseCase<Type, Params> {
-  Future<Either<Failure, Type>> call(Params params);
+abstract class UseCase<T, Params> {
+  FutureEither<T> call(Params params);
 }
 
 class NoParams extends Equatable {
