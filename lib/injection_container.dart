@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:clean_architecture_tdd_course/core/network/network_info.dart';
-import 'package:clean_architecture_tdd_course/features/number_trivia/data/datasources/number_trivia_local_datasource.dart';
-import 'package:clean_architecture_tdd_course/features/number_trivia/data/datasources/number_trivia_remote_datasource.dart';
-import 'package:clean_architecture_tdd_course/features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
-import 'package:clean_architecture_tdd_course/features/number_trivia/domain/contracts/number_trivia_repository_contract.dart';
+import 'core/network/network_info.dart';
+import 'features/number_trivia/data/datasources/number_trivia_local_datasource.dart';
+import 'features/number_trivia/data/datasources/number_trivia_remote_datasource.dart';
+import 'features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
+import 'features/number_trivia/domain/contracts/number_trivia_repository_contract.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +19,7 @@ import 'package:http/http.dart' as http;
 
 final sl = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   //! Features - Number Trivia
   // Bloc`
   sl.registerFactory(
@@ -56,9 +56,8 @@ void init() {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //! External
-  sl.registerLazySingletonAsync<SharedPreferences>(
-    () => SharedPreferences.getInstance(),
-  );
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => InternetConnectionChecker.instance);
 }

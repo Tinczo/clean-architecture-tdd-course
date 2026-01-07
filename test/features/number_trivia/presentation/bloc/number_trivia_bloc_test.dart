@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:clean_architecture_tdd_course/core/error/failures.dart';
 import 'package:clean_architecture_tdd_course/core/usecases/usecase.dart';
 import 'package:clean_architecture_tdd_course/core/util/input_converter.dart';
@@ -139,6 +141,32 @@ void main() {
         bloc.add(GetTriviaForConcreteNumber(tNumberString));
       },
     );
+
+    test(
+      'should ignore subsequent events when a previous event is still processing (droppable)',
+      () async {
+        // arrange
+        final completer = Completer<Either<Failure, NumberTrivia>>();
+        when(
+          mockGetConcreteNumberTrivia(any),
+        ).thenAnswer((_) => completer.future);
+        setUpMockInputConverterSuccess();
+
+        // act
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
+        // assert
+        await Future.delayed(Duration.zero);
+        verify(
+          mockGetConcreteNumberTrivia(Params(number: tNumberParsed)),
+        ).called(1);
+
+        // clean up
+        completer.complete(Right(tNumberTrivia));
+      },
+    );
   });
   group('GetTriviaForRandomNumber', () {
     final tNumberTrivia = NumberTrivia(number: 123, text: 'test trivia');
@@ -194,6 +222,30 @@ void main() {
         expectLater(bloc.stream, emitsInOrder(expected));
         // assertx
         bloc.add(GetTriviaForRandomNumber());
+      },
+    );
+
+    test(
+      'should ignore subsequent events when a previous event is still processing (droppable)',
+      () async {
+        // arrange
+        final completer = Completer<Either<Failure, NumberTrivia>>();
+        when(
+          mockGetRandomNumberTrivia(any),
+        ).thenAnswer((_) => completer.future);
+
+        // act
+        bloc.add(GetTriviaForRandomNumber());
+        bloc.add(GetTriviaForRandomNumber());
+        bloc.add(GetTriviaForRandomNumber());
+        bloc.add(GetTriviaForRandomNumber());
+
+        // assert
+        await Future.delayed(Duration.zero);
+        verify(mockGetRandomNumberTrivia(NoParams())).called(1);
+
+        // clean up
+        completer.complete(Right(tNumberTrivia));
       },
     );
   });
