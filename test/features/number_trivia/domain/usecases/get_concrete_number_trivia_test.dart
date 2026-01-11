@@ -10,10 +10,10 @@ import 'get_concrete_number_trivia_test.mocks.dart';
 @GenerateMocks([NumberTriviaRepository])
 void main() {
   late GetConcreteNumberTrivia usecase;
-  late MockNumberTriviaRepositoryContract mockNumberTriviaRepository;
+  late MockNumberTriviaRepository mockNumberTriviaRepository;
 
   setUp(() {
-    mockNumberTriviaRepository = MockNumberTriviaRepositoryContract();
+    mockNumberTriviaRepository = MockNumberTriviaRepository();
     usecase = GetConcreteNumberTrivia(mockNumberTriviaRepository);
   });
 

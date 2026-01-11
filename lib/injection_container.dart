@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'core/network/network_info.dart';
 import 'features/number_trivia/data/datasources/number_trivia_local_datasource.dart';
 import 'features/number_trivia/data/datasources/number_trivia_remote_datasource.dart';
