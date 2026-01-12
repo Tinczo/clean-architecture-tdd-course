@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -18,6 +19,7 @@ const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 const String INVALID_INPUT_FAILURE_MESSAGE =
     'Invalid Input - The number must be a positive integer or zero.';
 
+@injectable
 class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   final GetConcreteNumberTrivia getConcreteNumberTrivia;
   final GetRandomNumberTrivia getRandomNumberTrivia;

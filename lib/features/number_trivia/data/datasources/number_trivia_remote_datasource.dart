@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../models/number_trivia_model.dart';
@@ -17,6 +18,7 @@ abstract class NumberTriviaRemoteDataSource {
   Future<NumberTriviaModel> getRandomNumberTrivia();
 }
 
+@LazySingleton(as: NumberTriviaRemoteDataSource)
 class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   final http.Client client;
 

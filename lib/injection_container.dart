@@ -1,61 +1,28 @@
-import 'core/network/network_info.dart';
-import 'features/number_trivia/data/datasources/number_trivia_local_datasource.dart';
-import 'features/number_trivia/data/datasources/number_trivia_remote_datasource.dart';
-import 'features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
-import 'features/number_trivia/domain/contracts/number_trivia_repository_contract.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'core/util/input_converter.dart';
-import 'features/number_trivia/domain/usecases/get_random_number_trivia.dart';
-import 'features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'package:get_it/get_it.dart';
-
-import 'features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
-
+import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'injection_container.config.dart';
 
 final sl = GetIt.instance;
 
-Future<void> init() async {
-  //! Features - Number Trivia
-  // Bloc`
-  sl.registerFactory(
-    () => NumberTriviaBloc(
-      getConcreteNumberTrivia: sl(),
-      getRandomNumberTrivia: sl(),
-      inputConverter: sl(),
-    ),
-  );
+@InjectableInit(
+  initializerName: 'init',
+  preferRelativeImports: true,
+  asExtension: true,
+)
+Future<void> init() async => sl.init();
 
-  // Use cases
-  sl.registerLazySingleton(() => GetConcreteNumberTrivia(sl()));
-  sl.registerFactory(() => GetRandomNumberTrivia(sl()));
+@module
+abstract class RegisterModule {
+  @lazySingleton
+  http.Client get httpClient => http.Client();
 
-  // Repository
-  sl.registerLazySingleton<NumberTriviaRepository>(
-    () => NumberTriviaRepositoryImpl(
-      remoteDataSource: sl(),
-      localDataSource: sl(),
-      networkInfo: sl(),
-    ),
-  );
+  @lazySingleton
+  InternetConnectionChecker get dataConnectionChecker =>
+      InternetConnectionChecker.instance;
 
-  // Data sources
-  sl.registerLazySingleton<NumberTriviaRemoteDataSource>(
-    () => NumberTriviaRemoteDataSourceImpl(client: sl()),
-  );
-  sl.registerLazySingleton<NumberTriviaLocalDataSource>(
-    () => NumberTriviaLocalDataSourceImpl(sharedPreferences: sl()),
-  );
-
-  //! Core
-  sl.registerLazySingleton(() => InputConverter());
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-
-  //! External
-  final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
-  sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => InternetConnectionChecker.instance);
+  @preResolve
+  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 }
