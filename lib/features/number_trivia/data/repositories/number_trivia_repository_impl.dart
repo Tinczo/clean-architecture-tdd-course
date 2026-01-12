@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
@@ -12,6 +13,7 @@ import '../models/number_trivia_model.dart';
 
 typedef _ConcreteOrRandomChooser = Future<NumberTriviaModel> Function();
 
+@LazySingleton(as: NumberTriviaRepository)
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NumberTriviaRemoteDataSource remoteDataSource;
   final NumberTriviaLocalDataSource localDataSource;
